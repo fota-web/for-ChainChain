@@ -1,0 +1,30 @@
+private void clearAll() {//清空目前所選以及所有editText
+        edName.setText("");
+        edElse.setText("");
+        edHobby.setText("");
+        edPhone.setText("");
+        getNowArray.clear();
+
+        SQLiteDatabase db;    //資料庫
+        db = openOrCreateDatabase(DB_NAME,  Context.MODE_PRIVATE, null);
+        //db.delete(tb_name, null,null);
+
+        Cursor c=db.rawQuery("SELECT * FROM "+TABLE_NAME, null);
+
+        if (c.getCount()>0){    // 若有資料
+            String str="總共有 "+c.getCount()+"筆資料\n";
+            str+="-----\n";
+
+            c.moveToFirst();    // 移到第 1 筆資料
+            do{        // 逐筆讀出資料
+                str+= c.getString(0)+"\n";
+            } while(c.moveToNext());    // 有一下筆就繼續迴圈
+
+
+            show.setText(str);
+        }
+
+        db.close();        // 關閉資料庫
+        Log.e("test",""+show);
+
+    }
