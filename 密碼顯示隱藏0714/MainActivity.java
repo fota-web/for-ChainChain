@@ -14,8 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Button;
 import android.view.View.OnClickListener;
-import android.view.GestureDetector;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private Button button;
@@ -31,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         button = (Button)findViewById(R.id.button);
         edit = (EditText)findViewById(R.id.edit);
 
-
+        //設定監聽的副程式"touchlistener"
         button.setOnTouchListener(touchlistener);
 
 
@@ -41,12 +39,12 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public boolean onTouch(View v,MotionEvent event){
-            Log.e("touch","touch");
             if(event.getAction() == MotionEvent.ACTION_DOWN){
+                //按下顯示密碼
                 edit.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                Log.e("down","123");
             }
             else if (event.getAction() == MotionEvent.ACTION_UP){
+                //放開變成*******
                 edit.setTransformationMethod(PasswordTransformationMethod.getInstance());
             }
 
